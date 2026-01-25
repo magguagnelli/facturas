@@ -32,7 +32,7 @@ function App() {
             loading
               ? <p>Cargando datos de la API...</p>
               : apiLogin
-                  ? <p>{apiData.title}</p>
+                  ? <p>{apiLogin.title}</p>
                   : <p>Error al cargar los datos de la API.</p>
           }
         </div>

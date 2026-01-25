@@ -17,12 +17,7 @@ app = FastAPI(title="Sistema de Facturas")
 @app.get("/api/login")
 async def login():
     logger.info("Accessed /api/login")
-   return {
-        "data": "Login",
-        "title": "Inicio de Sesión",
-        "x_title": "Apps",
-        "y_title": "Fun with data"
-    }
+   return {"title": "Inicio de Sesión", "message": "Bienvenido al sistema de facturas"}
 
 # --- Static Files Setup ---
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")

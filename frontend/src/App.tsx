@@ -1,43 +1,21 @@
 import { useState, useEffect } from 'react'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-import { Scatter } from 'react-chartjs-2'
 import './App.css'
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
 
 interface ApiResponse {
   message: string
 }
 
 function App() {
-  const [apiData, setApiData] = useState<ApiResponse | null>(null)
+  const [apiLogin, setApiData] = useState<ApiResponse | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // Fetch both hello message and chart data
     Promise.all([
-      fetch('/api/hello').then(response => response.json()),
-      //fetch('/api/data').then(response => response.json())
+      fetch('/api/login').then(response => response.json()),
     ])
-      .then(([helloData, dataResponse]) => {
-        setApiData(helloData)
+      .then(([loginData]) => {
+        setApiData(loginData)
         setLoading(false)
       })
       .catch(error => {
@@ -49,7 +27,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Sistema de Facturas</h1>
-        <div className="content"></div>
+        <div className="content">
+        { loading ? (<p>Cargando datos de la API...</p>) : 
+          {  apiLogin ? ( <p>{apiData.title} </p>):( <p>Error al cargar los datos de la API.</p>)} 
+        }
+        </div>
       </header>
     </div>
   )

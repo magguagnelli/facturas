@@ -28,9 +28,13 @@ function App() {
       <header className="App-header">
         <h1>Sistema de Facturas</h1>
         <div className="content">
-        { loading ? (<p>Cargando datos de la API...</p>) : 
-          {  apiLogin ? ( <p>{apiData.title} </p>):( <p>Error al cargar los datos de la API.</p>)} 
-        }
+          {
+            loading
+              ? <p>Cargando datos de la API...</p>
+              : apiLogin
+                  ? <p>{apiData.title}</p>
+                  : <p>Error al cargar los datos de la API.</p>
+          }
         </div>
       </header>
     </div>

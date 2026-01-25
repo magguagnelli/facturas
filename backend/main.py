@@ -11,7 +11,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Simple FastAPI + React App")
+app = FastAPI(title="Sistema de Facturas")
 
 # --- API Routes ---
 @app.get("/api/hello")

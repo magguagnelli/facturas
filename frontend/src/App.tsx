@@ -46,7 +46,7 @@ function App() {
   useEffect(() => {
     // Fetch both hello message and chart data
     Promise.all([
-      //fetch('/api/hello').then(response => response.json()),
+      fetch('/api/hello').then(response => response.json()),
       fetch('/api/data').then(response => response.json())
     ])
       .then(([helloData, dataResponse]) => {

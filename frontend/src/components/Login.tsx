@@ -17,6 +17,7 @@ export default function Login() {
   };
 
   return (
+   <> 
     <div className="titSecciones center">
         <h3>INICIO DE SESIÓN</h3>
     </div>
@@ -56,6 +57,6 @@ export default function Login() {
                 </div>
             </form>
         </div>
-    </div>
+    </div></>
   );
 }

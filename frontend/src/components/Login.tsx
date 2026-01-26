@@ -21,7 +21,7 @@ export default function Login() {
                 <img src="/img/PLECA_LOGO.png">
             </div>
         </div>
-        <div className="boxLogin">
+        <div class="boxLogin">
             <form id="form_log" method="POST" action="registro" class="row" data-gtm-form-interact-id="0">
                 <div class="col-12 ma-g">
                     <label class="titForm verde_t"><img src="/img/USUARIO.svg">USUARIO</label>

@@ -15,21 +15,23 @@ export default function Login() {
   };
 
   return (
-    <div class="row justify-content-center">
-        <div class="boxLogin">
-            <div class="headerBox">
-                <img src="/img/PLECA_LOGO.png">
-            </div>
+    <div class="boxLogin">
+        <div class="headerBox">
+            <img src="/img/PLECA_LOGO.png" />
         </div>
-        <div class="boxLogin">
+        <div class="bodyBox">
             <form id="form_log" method="POST" action="registro" class="row" data-gtm-form-interact-id="0">
                 <div class="col-12 ma-g">
-                    <label class="titForm verde_t"><img src="/img/USUARIO.svg">USUARIO</label>
-                    <input type="text" id="user" name="user" class="form-control form-login oro_t">
+                    <label class="titForm verde_t">
+                        <img src="/img/USUARIO.svg" />USUARIO
+                    </label>
+                    <input type="text" id="user" name="user" class="form-control form-login oro_t" />
                 </div>
                 <div class="col-12 ma-g">
-                    <label class="titForm verde_t"><img src="/img/CONTRASENA.svg">CONTRASEÑA</label>
-                    <input type="password" id="pass" name="pass" class="form-control form-login oro_t" data-gtm-form-interact-field-id="0">
+                    <label class="titForm verde_t">
+                        <img src="/img/CONTRASENA.svg" />CONTRASEÑA
+                    </label>
+                    <input type="password" id="pass" name="pass" class="form-control form-login oro_t" data-gtm-form-interact-field-id="0" />
                     <a href="#" onclick="mostrarRestContrasena()" class="pass-olvide">Olvidé mi contraseña</a>
                 </div>
                 {/* Si vas a usar reCAPTCHA real, normalmente se integra con script o librería */}
@@ -40,7 +42,9 @@ export default function Login() {
                     <button id="loginBtn" class="btnGral verde_t" type="submit">
                         <p>INGRESAR</p>
                         <div class="btnIcon">
-                            <div class="boxIcon verde"><img src="/img/CONTINUAR.svg"></div>
+                            <div class="boxIcon verde">
+                                <img src="/img/CONTINUAR.svg" />
+                            </div>
                             <span class="s-verde"></span>
                         </div>
                     </button>

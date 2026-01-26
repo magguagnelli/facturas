@@ -1,28 +1,25 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 
 app = FastAPI()
 
-# --- API ---
-@app.get("/api/hello")
-def hello():
-    return {"message": "ok"}
-
-# --- FRONTEND (Vite build) ---
 BASE_DIR = Path(__file__).resolve().parent.parent
-FRONTEND_DIST = BASE_DIR / "frontend" / "dist"
-INDEX_HTML = FRONTEND_DIST / "index.html"
+DIST = BASE_DIR / "frontend" / "dist"
+INDEX = DIST / "index.html"
 
-if FRONTEND_DIST.exists():
-    # sirve assets estáticos
-    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="static")
+print("DIST:", DIST, "exists:", DIST.exists())
 
-    # SPA fallback → React Router
-    @app.get("/{full_path:path}")
-    async def spa_fallback(request: Request, full_path: str):
-        # no interceptar API ni docs
-        if full_path.startswith(("api", "docs", "openapi.json")):
-            return {"detail": "Not Found"}
-        return FileResponse(INDEX_HTML)
+# Sirve assets del build (Vite suele ponerlos en dist/assets)
+app.mount("/assets", StaticFiles(directory=DIST / "assets"), name="assets")
+
+@app.get("/")
+def root():
+    return FileResponse(INDEX)
+
+@app.get("/{path:path}")
+def spa(path: str):
+    if path.startswith(("api", "docs", "openapi.json", "assets")):
+        return {"detail": "Not Found"}
+    return FileResponse(INDEX)

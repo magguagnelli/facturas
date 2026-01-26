@@ -12,7 +12,7 @@ def hello():
 
 # --- FRONTEND (Vite build) ---
 BASE_DIR = Path(__file__).resolve().parent.parent
-FRONTEND_DIST = BASE_DIR / "frontend" / "dist"
+FRONTEND_DIST = BASE_DIR / "frontend" / "components"
 INDEX_HTML = FRONTEND_DIST / "index.html"
 
 if FRONTEND_DIST.exists():

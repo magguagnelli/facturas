@@ -15,7 +15,7 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
+export default App;
 /*import Login from "./components/Login";
 
 function App() {

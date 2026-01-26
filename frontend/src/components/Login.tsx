@@ -15,6 +15,9 @@ export default function Login() {
   };
 
   return (
+    <div class="titSecciones center">
+        <h3>INICIO DE SESIÓN</h3>
+    </div>
     <div class="boxLogin">
         <div class="headerBox">
             <img src="/img/PLECA_LOGO.png" />

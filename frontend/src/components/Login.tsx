@@ -15,60 +15,38 @@ export default function Login() {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-12 col-md-6">
-          <form onSubmit={onSubmit}>
-            <div className="col-12 ma-g">
-              <label className="titForm verde_t">
-                <img src="/img/USUARIO.svg" alt="Usuario" /> USUARIO
-              </label>
-
-              <input
-                type="text"
-                id="user"
-                name="user"
-                className="form-control form-login oro_t"
-              />
+    <div class="row justify-content-center">
+        <div class="boxLogin">
+            <div class="headerBox">
+                <img src="/img/PLECA_LOGO.png">
             </div>
-
-            <div className="col-12 ma-g">
-              <label className="titForm verde_t">
-                <img src="/img/CONTRASENA.svg" alt="Contraseña" /> CONTRASEÑA
-              </label>
-
-              <input
-                type="password"
-                id="pass"
-                name="pass"
-                className="form-control form-login oro_t"
-              />
-
-              <a href="#" onClick={mostrarRestContrasena} className="pass-olvide">
-                Olvidé mi contraseña
-              </a>
-            </div>
-
-            {/* Si vas a usar reCAPTCHA real, normalmente se integra con script o librería */}
-            <div id="recaptcha_log" className="col-12 ma-g">
-              {/* placeholder */}
-            </div>
-
-            <div className="col-12 ma-g">
-              <button type="submit" className="btnLogin">
-                <p>INGRESAR</p>
-
-                <div className="btnIcon">
-                  <div className="boxIcon verde">
-                    <img src="/img/CONTINUAR.svg" alt="Continuar" />
-                  </div>
-                  <span className="s-verde" />
-                </div>
-              </button>
-            </div>
-          </form>
         </div>
-      </div>
+        <div className="boxLogin">
+            <form id="form_log" method="POST" action="registro" class="row" data-gtm-form-interact-id="0">
+                <div class="col-12 ma-g">
+                    <label class="titForm verde_t"><img src="/img/USUARIO.svg">USUARIO</label>
+                    <input type="text" id="user" name="user" class="form-control form-login oro_t">
+                </div>
+                <div class="col-12 ma-g">
+                    <label class="titForm verde_t"><img src="/img/CONTRASENA.svg">CONTRASEÑA</label>
+                    <input type="password" id="pass" name="pass" class="form-control form-login oro_t" data-gtm-form-interact-field-id="0">
+                    <a href="#" onclick="mostrarRestContrasena()" class="pass-olvide">Olvidé mi contraseña</a>
+                </div>
+                {/* Si vas a usar reCAPTCHA real, normalmente se integra con script o librería */}
+                <div id="recaptcha_log" className="col-12 ma-g">
+                {/* placeholder */}
+                </div>                                          
+                <div class="col-12 t-c">
+                    <button id="loginBtn" class="btnGral verde_t" type="submit">
+                        <p>INGRESAR</p>
+                        <div class="btnIcon">
+                            <div class="boxIcon verde"><img src="/img/CONTINUAR.svg"></div>
+                            <span class="s-verde"></span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
   );
 }

@@ -24,40 +24,40 @@ export default function Login() {
 
   return (
    <> 
-    <div className="titSecciones center">
+    <div class="titSecciones center">
         <h3>INICIO DE SESIÓN</h3>
     </div>
-    <div className="boxLogin">
-        <div className="headerBox">
+    <div class="boxLogin">
+        <div class="headerBox">
             <img src="/img/PLECA_LOGO.png" />
         </div>
-        <div className="bodyBox">
-            <form id="form_log" method="POST" action="registro" className="row" data-gtm-form-interact-id="0">
-                <div className="col-12 ma-g">
-                    <label className="titForm verde_t">
+        <div class="bodyBox">
+            <form id="form_log" method="POST" action="registro" class="row" data-gtm-form-interact-id="0">
+                <div class="col-12 ma-g">
+                    <label class="titForm verde_t">
                         <img src="/img/USUARIO.svg" />USUARIO
                     </label>
-                    <input type="text" id="user" name="user" className="form-control form-login oro_t" />
+                    <input type="text" id="user" name="user" class="form-control form-login oro_t" />
                 </div>
-                <div className="col-12 ma-g">
-                    <label className="titForm verde_t">
+                <div class="col-12 ma-g">
+                    <label class="titForm verde_t">
                         <img src="/img/CONTRASENA.svg" />CONTRASEÑA
                     </label>
-                    <input type="password" id="pass" name="pass" className="form-control form-login oro_t" data-gtm-form-interact-field-id="0" />
-                    <a href="#" onclick="mostrarRestContrasena()" className="pass-olvide">Olvidé mi contraseña</a>
+                    <input type="password" id="pass" name="pass" class="form-control form-login oro_t" data-gtm-form-interact-field-id="0" />
+                    <a href="#" onclick="mostrarRestContrasena()" class="pass-olvide">Olvidé mi contraseña</a>
                 </div>
                 {/* Si vas a usar reCAPTCHA real, normalmente se integra con script o librería */}
-                <div id="recaptcha_log" className="col-12 ma-g">
+                <div id="recaptcha_log" class="col-12 ma-g">
                 {/* placeholder */}
                 </div>                                          
-                <div className="col-12 t-c">
-                    <button onClick={handleLogin} id="" className="btnGral verde_t" type="submit">
+                <div class="col-12 t-c">
+                    <button onClick={handleLogin} id="" class="btnGral verde_t" type="submit">
                         <p>INGRESAR</p>
-                        <div className="btnIcon">
-                            <div className="boxIcon verde">
+                        <div class="btnIcon">
+                            <div class="boxIcon verde">
                                 <img src="/img/CONTINUAR.svg" />
                             </div>
-                            <span className="s-verde"></span>
+                            <span class="s-verde"></span>
                         </div>
                     </button>
                 </div>

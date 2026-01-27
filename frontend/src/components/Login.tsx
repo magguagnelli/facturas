@@ -51,7 +51,7 @@ export default function Login() {
                 {/* placeholder */}
                 </div>                                          
                 <div className="col-12 t-c">
-                    <button onClick={handleLogin} id="loginBtn" className="btnGral verde_t" type="submit">
+                    <button onClick={handleLogin} id="" className="btnGral verde_t" type="submit">
                         <p>INGRESAR</p>
                         <div className="btnIcon">
                             <div className="boxIcon verde">

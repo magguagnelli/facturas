@@ -5,6 +5,17 @@ export default function Login() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
 
+  const mostrarRestContrasena = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // TODO: aquí navega a /reset o abre un modal
+    console.log("Olvidé mi contraseña");
+  };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: aquí tu lógica real de login
+    console.log({ user, pass });
+  };
   const navigate = useNavigate();
   function handleLogin() {
     // lógica de login (validaciones, fetch, etc.)

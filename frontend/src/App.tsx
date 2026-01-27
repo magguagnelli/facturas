@@ -7,9 +7,9 @@ import Facturas from "./components/Facturas";
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
       <Route path="/" element={<Login />} />
       <Route path="/facturas" element={<Facturas />} />
+      <Route path="/" element={<Navigate to="/facturas" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

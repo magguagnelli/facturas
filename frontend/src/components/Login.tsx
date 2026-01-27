@@ -32,7 +32,7 @@ export default function Login() {
             <img src="/img/PLECA_LOGO.png" />
         </div>
         <div class="bodyBox">
-            <form id="form_log" method="POST" action="registro" class="row" data-gtm-form-interact-id="0">
+            <form id="form_log" method="POST" action="#" class="row" data-gtm-form-interact-id="0">
                 <div class="col-12 ma-g">
                     <label class="titForm verde_t">
                         <img src="/img/USUARIO.svg" />USUARIO
@@ -51,7 +51,7 @@ export default function Login() {
                 {/* placeholder */}
                 </div>                                          
                 <div class="col-12 t-c">
-                    <button onClick={handleLogin} id="" class="btnGral verde_t" type="submit">
+                    <button onClick={handleLogin} id="" class="btnGral verde_t">
                         <p>INGRESAR</p>
                         <div class="btnIcon">
                             <div class="boxIcon verde">

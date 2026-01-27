@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Upload, FileText, CheckCircle, AlertCircle, X, Download, Eye } from 'lucide-react';
-import './XMLUploadForm.css';
+import "./Facturas.css";
 
 export default function XMLUploadForm() {
   const [files, setFiles] = useState<any[]>([]);

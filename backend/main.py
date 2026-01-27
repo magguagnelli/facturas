@@ -26,7 +26,7 @@ async def login():
     return {"message":"Bienvenido al sistema de facturas"}
 
 # --- Static (Vite build) ---
-dist_dir = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+dist_dir = Path(__file__).resolve().parent.parent / "frontend" / "components"
 index_html = dist_dir / "index.html"
 
 if dist_dir.exists():

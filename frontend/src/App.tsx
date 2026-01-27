@@ -5,8 +5,6 @@ import Facturas from "./components/Facturas";
 
 
 export default function App() {
-  const navigate = useNavigate();
-  navigate("/facturas");
   return (
     <Routes>
       <Route path="/" element={<Login />} />

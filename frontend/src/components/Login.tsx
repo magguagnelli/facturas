@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [user, setUser] = useState("");
@@ -15,6 +16,11 @@ export default function Login() {
     // TODO: aquí tu lógica real de login
     console.log({ user, pass });
   };
+  const navigate = useNavigate();
+  function handleLogin() {
+    // lógica de login (validaciones, fetch, etc.)
+    navigate("/facturas");          // 👈 AQUÍ
+  }
 
   return (
    <> 
@@ -45,7 +51,7 @@ export default function Login() {
                 {/* placeholder */}
                 </div>                                          
                 <div className="col-12 t-c">
-                    <button id="loginBtn" className="btnGral verde_t" type="submit">
+                    <button onClick={handleLogin} id="loginBtn" className="btnGral verde_t" type="submit">
                         <p>INGRESAR</p>
                         <div className="btnIcon">
                             <div className="boxIcon verde">

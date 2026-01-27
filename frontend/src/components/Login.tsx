@@ -32,7 +32,7 @@ export default function Login() {
             <img src="/img/PLECA_LOGO.png" />
         </div>
         <div class="bodyBox">
-            <form id="form_log" method="POST" action="facturas" class="row" data-gtm-form-interact-id="0">
+            <form id="form_log" class="row" data-gtm-form-interact-id="0">
                 <div class="col-12 ma-g">
                     <label class="titForm verde_t">
                         <img src="/img/USUARIO.svg" />USUARIO

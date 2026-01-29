@@ -5,11 +5,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from databricks import sql
 
-conn = sql.connect(
-    host=os.environ["DB_HOST"],
-    http_path=os.environ["HTTP_PATH"],
-    acces_token=os.environ["ACCESS_TOKEN"],
-)
+#conn = sql.connect(
+#    host=os.environ["DB_HOST"],
+#    http_path=os.environ["HTTP_PATH"],
+#    acces_token=os.environ["ACCESS_TOKEN"],
+#)
 
 # --- Logging Setup ---
 logging.basicConfig(
@@ -24,11 +24,9 @@ app = FastAPI(title="Sistema de Facturas")
 # --- API Routes ---
 @app.get("/api/login")
 async def login():
-    cursor = conn.cursor()
-    cursor.execute("SELECT * from range(10)")
-    logger.info(cursor.fetchall())
-    cursor.close()
-    conn.close()
+    logger.info(os.environ["DB_HOST"])
+    logger.info(os.environ["HTTP_PATH"])
+    logger.info(os.environ["ACCESS_TOKEN"])
     logger.info("Accessed /api/login")
     return {"message":"Bienvenido al sistema de facturas"}
 

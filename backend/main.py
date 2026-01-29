@@ -6,9 +6,9 @@ from fastapi.responses import FileResponse
 from databricks import sql
 
 conn = sql.connect(
-    host=os.environ["DB_HOST"],
-    http_path=os.environ["HTTP_PATH"],
-    acces_token=os.environ["ACCESS_TOKEN"],
+    host="adb-7405615568530351.11.azuredatabricks.net",
+    http_path="/sql/1.0/warehouses/605b873f22449da5",
+    acces_token="dapi927b2dd86f775c5296eb785afff3053a",
 )
 
 # --- Logging Setup ---

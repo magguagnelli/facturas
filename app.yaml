@@ -1,4 +1,5 @@
-#command: ["uvicorn", "backend.main:app"]
+command: ["uvicorn", "backend.main:app"]
+
 resources:
   secret_db_host:
     type: secret
@@ -33,11 +34,3 @@ env:
     valueFrom: secret_db_user
   - name: DB_PASSWORD
     valueFrom: secret_db_password
-
-command:
-  - gunicorn
-  - app:app
-  - -b
-  - 0.0.0.0:${DATABRICKS_APP_PORT}
-  - "uvicorn"
-  - "backend.main:app"

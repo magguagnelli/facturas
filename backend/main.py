@@ -24,9 +24,6 @@ app = FastAPI(title="Sistema de Facturas")
 # --- API Routes ---
 @app.get("/api/login")
 async def login():
-    logger.info(os.environ["DB_HOST"])
-    logger.info(os.environ["HTTP_PATH"])
-    logger.info(os.environ["ACCESS_TOKEN"])
     logger.info("Accessed /api/login")
     return {"message":"Bienvenido al sistema de facturas"}
 

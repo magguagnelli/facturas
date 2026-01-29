@@ -5,11 +5,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from databricks import sql
 
-#conn = sql.connect(
-#    host=os.environ["DB_HOST"],
-#    http_path=os.environ["HTTP_PATH"],
-#    acces_token=os.environ["ACCESS_TOKEN"],
-#)
+conn = sql.connect(
+    host=os.environ["DB_HOST"],
+    http_path=os.environ["HTTP_PATH"],
+    acces_token=os.environ["ACCESS_TOKEN"],
+)
 
 # --- Logging Setup ---
 logging.basicConfig(

@@ -9,7 +9,6 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/facturas" element={<Facturas />} />
-      <Route path="/" element={<Navigate to="/facturas" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

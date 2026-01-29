@@ -39,14 +39,14 @@ resources:
 
 env:
   - name: DB_HOST
-    valueFrom: secret_db_host
+    valueFrom: "adb-7405615568530351.11.azuredatabricks.net"
   - name: DB_NAME
-    valueFrom: secret_db_name
+    valueFrom: "databricks_postgres"
   - name: DB_USER
     valueFrom: secret_db_user
   - name: DB_PASSWORD
     valueFrom: secret_db_password
   - name: HTTP_PATH
-    valueFrom: secret_db_httpath
+    valueFrom: "/sql/1.0/warehouses/605b873f22449da5"
   - name: ACCESS_TOKEN
-    valueFrom: secret_db_access_token
+    valueFrom: "dapi927b2dd86f775c5296eb785afff3053a"

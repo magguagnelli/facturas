@@ -11,6 +11,7 @@ conn = psycopg2.connect(
     user=os.environ["DB_USER"],
     password=os.environ["DB_PASSWORD"],
     port=int(os.environ.get("DB_PORT", "5432")),
+    sslmode="require",
     connect_timeout=5,
 )
 

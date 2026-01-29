@@ -3,6 +3,17 @@ import logging
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+import psycopg2
+
+conn = psycopg2.connect(
+    host=os.environ["DB_HOST"],
+    dbname=os.environ["DB_NAME"],
+    user=os.environ["DB_USER"],
+    password=os.environ["DB_PASSWORD"],
+    port=int(os.environ.get("DB_PORT", "5432")),
+    connect_timeout=5,
+)
+
 # --- Logging Setup ---
 logging.basicConfig(
     level=logging.INFO,
@@ -16,11 +27,16 @@ app = FastAPI(title="Sistema de Facturas")
 # --- API Routes ---
 @app.get("/api/login")
 async def login():
+    cur = conn.cursor()
+    cur.execute("SELECT 1;")
+    logger.info("DB OK ✅", cur.fetchone())
+    cur.close()
+    conn.close()
     logger.info("Accessed /api/login")
     return {"message":"Bienvenido al sistema de facturas"}
 
 @app.get("/api/facturas")
-async def login():
+async def facturas():
     logger.info("Accessed /api/facturas")
     return {"message":"Bienvenido al sistema de facturas"}
 

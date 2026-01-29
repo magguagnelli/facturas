@@ -19,7 +19,7 @@ export default function Login() {
   const navigate = useNavigate();
   function handleLogin() {
     // lógica de login (validaciones, fetch, etc.)
-    navigate("/facturas");          // 👈 AQUÍ
+    navigate("/facturas");
   }
 
   return (

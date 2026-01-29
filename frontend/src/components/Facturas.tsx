@@ -163,7 +163,7 @@ export default function XMLUploadForm() {
 			<br/><br/>
             
           </div>
-		  <h2 className="xml-upload-title-2">Carga de Archivos XML Abraham</h2>
+		  <h2 className="xml-upload-title-2">Carga de Archivos XML</h2>
           <p className="xml-upload-subtitle">Arrastra tus archivos XML o haz clic para seleccionarlos</p>
         </div>
 

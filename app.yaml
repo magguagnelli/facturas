@@ -29,11 +29,13 @@ resources:
     type: secret
     scope: facturas-secrets
     key: HTTP_PATH
+    permission: CAN_READ
 
   secret_db_access_token:
     type: secret
     scope: facturas-secrets
     key: ACCESS_TOKEN
+    permission: CAN_READ
 
 env:
   - name: DB_HOST
@@ -47,4 +49,4 @@ env:
   - name: HTTP_PATH
     valueFrom: secret_db_hhtpath
   - name: ACCESS_TOKEN
-    valueFrom: secret_db_access_token 
+    valueFrom: secret_db_access_token

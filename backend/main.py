@@ -3,16 +3,12 @@ import logging
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-import psycopg2
+from databricks import sql
 
-conn = psycopg2.connect(
+conn = sql.connect(
     host=os.environ["DB_HOST"],
-    dbname=os.environ["DB_NAME"],
-    user=os.environ["DB_USER"],
-    password=os.environ["DB_PASSWORD"],
-    port=int(os.environ.get("DB_PORT", "5432")),
-    sslmode="require",
-    connect_timeout=5,
+    http_path=os.environ["HTTP_PATH"],
+    acces_token=os.environ["ACCESS_TOKEN"],
 )
 
 # --- Logging Setup ---
@@ -28,10 +24,10 @@ app = FastAPI(title="Sistema de Facturas")
 # --- API Routes ---
 @app.get("/api/login")
 async def login():
-    cur = conn.cursor()
-    cur.execute("SELECT 1;")
-    logger.info("DB OK ✅", cur.fetchone())
-    cur.close()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * from range(10)")
+    logger.info(cursor.fetchall())
+    cursor.close()
     conn.close()
     logger.info("Accessed /api/login")
     return {"message":"Bienvenido al sistema de facturas"}

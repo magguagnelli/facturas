@@ -25,6 +25,16 @@ resources:
     key: DB_PASSWORD
     permission: CAN_READ
 
+  secret_db_hhtpath:
+    type: secret
+    scope: facturas-secrets
+    key: HTTP_PATH
+
+  secret_db_access_token:
+    type: secret
+    scope: facturas-secrets
+    key: ACCESS_TOKEN
+
 env:
   - name: DB_HOST
     valueFrom: secret_db_host
@@ -34,3 +44,7 @@ env:
     valueFrom: secret_db_user
   - name: DB_PASSWORD
     valueFrom: secret_db_password
+  - name: HTTP_PATH
+    valueFrom: secret_db_hhtpath
+  - name: ACCESS_TOKEN
+    valueFrom: secret_db_access_token 

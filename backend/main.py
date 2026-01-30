@@ -1,6 +1,6 @@
 import os
 import logging
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, logger
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pathlib import Path
@@ -24,6 +24,7 @@ app = FastAPI(title="Sistema de Facturas")
 #loggs
 @app.get("/api/login")
 def login():
+    logger.info("Accessed /api/login")
     conn = psycopg2.connect(
         host=DB_HOST,
         port=5432,
@@ -38,21 +39,21 @@ def login():
     conn.close()
     return {"message":db_resp}
 
-# --- Frontend Serving ---
-DIST_DIR = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+# --- Static Files Setup ---
+static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+os.makedirs(static_dir, exist_ok=True)
 
-# 1) archivos estáticos (assets, js, css)
-app.mount("/assets", StaticFiles(directory=DIST_DIR / "assets"), name="assets")
+app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 
-# 2) index para root
-@app.get("/")
-def index():
-    return FileResponse(DIST_DIR / "index.html")
-
-# 3) fallback SPA: cualquier ruta que no sea /api/* debe regresar index.html
+# --- Catch-all for React Routes ---
 @app.get("/{full_path:path}")
-def spa_fallback(full_path: str):
-    # si quieres excluir API:
-    if full_path.startswith("api/"):
-        return {"detail": "Not Found"}
-    return FileResponse(DIST_DIR / "index.html")
+async def serve_react(full_path: str):
+    index_html = os.path.join(static_dir, "index.html")
+    if os.path.exists(index_html):
+        logger.info(f"Serving React frontend for path: /{full_path}")
+        return FileResponse(index_html)
+    logger.error("Frontend not built. index.html missing.")
+    raise HTTPException(
+        status_code=404,
+        detail="Frontend not built. Please run 'npm run build' first."
+    )

@@ -6,6 +6,12 @@ from fastapi.responses import FileResponse
 from pathlib import Path
 import psycopg2
 
+# --- Logging Setup ---
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+logger = logging.getLogger(__name__)
 #wherehouse
    # DATABRICKS_HOST ="instance-ee9c166c-7472-4aa4-b57c-7234a9730321.database.azuredatabricks.net"
     #HTTP_PATH ="/sql/1.0/warehouses/605b873f22449da5"
@@ -21,23 +27,12 @@ DB_SSL_MODE = "require"
 app = FastAPI(title="Sistema de Facturas")
 
 # --- API Routes ---
-#loggs
+#login home
 @app.get("/api/login")
-def login():
+async def login():
     logger.info("Accessed /api/login")
-    conn = psycopg2.connect(
-        host=DB_HOST,
-        port=5432,
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        sslmode=DB_SSL_MODE,
-    )
-    with conn.cursor() as cur:
-        cur.execute("SELECT NOW()")
-        db_resp = cur.fetchone()[0]
-    conn.close()
-    return {"message":db_resp}
+    return {"message":"Bienvenido al sistema de facturas"}
+
 
 # --- Static Files Setup ---
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")

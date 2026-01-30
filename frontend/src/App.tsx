@@ -1,13 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/Login";
-//import Facturas from "./components/Facturas";
+import LoginPage from "./pages/LoginPage";
+import FacturasPage from "./pages/FacturasPage";
 //import ProtectedRoute from "./components/ProtectedRoute";
 
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+       <Route path="/facturas" element={<FacturasPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<Navigate to="/facturas" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

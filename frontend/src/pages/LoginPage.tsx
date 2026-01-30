@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Facturas() {
+export default function LoginPage() {
   const [login, setlogin] = useState<any>(null);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Upload, FileText, CheckCircle, AlertCircle, X, Download, Eye } from 'lucide-react';
 import "./Facturas.css";
 
-export default function XMLUploadForm() {
+export default function FacturasPage() {
   const [files, setFiles] = useState<any[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<any>(null);

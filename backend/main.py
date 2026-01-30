@@ -5,6 +5,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pathlib import Path
 import psycopg2
+from fastapi import Depends
+from fastapi.security import OAuth2PasswordRequestForm
+from auth import authenticate_user, create_access_token
+from deps import get_current_user
+
+
 # 
 # --- Logging Setup ---
 logging.basicConfig(
@@ -29,6 +35,23 @@ DB_SSL_MODE = "require"
 
 
 # --- API Routes ---
+@app.post("/auth/login")
+def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    user = authenticate_user(form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(status_code=401, detail="Credenciales inválidas")
+
+    token = create_access_token({"sub": user["username"]})
+    return {
+        "access_token": token,
+        "token_type": "bearer"
+    }
+
+@app.get("/auth/me")
+def me(user=Depends(get_current_user)):
+    return user
+
+
 #login home
 @app.get("/api/login")
 def login():
@@ -48,10 +71,9 @@ def login():
     return {"message":db_resp}
 
 #facturas home
-@app.get("/api/facturas")
-async def facturas():
-    logger.info("Accessed /api/facturas")
-    return {"message":"Bienvenido al sistema de facturas"}
+@app.get("/facturas")
+def listar_facturas(user=Depends(get_current_user)):
+    return []
 
 # --- Static Files Setup ---
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")

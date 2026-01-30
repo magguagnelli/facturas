@@ -4,3 +4,5 @@ python-multipart==0.0.9
 aiofiles==23.2.1 
 psycopg2-binary
 databricks-sql-connector==0.9.1
+python-jose[cryptography] 
+passlib[bcrypt]

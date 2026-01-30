@@ -1,8 +1,9 @@
 import os
 import logging
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from pathlib import Path
 import psycopg2
 
 #wherehouse
@@ -36,3 +37,22 @@ def login():
         db_resp = cur.fetchone()[0]
     conn.close()
     return {"message":db_resp}
+
+# --- Frontend Serving ---
+DIST_DIR = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+
+# 1) archivos estáticos (assets, js, css)
+app.mount("/assets", StaticFiles(directory=DIST_DIR / "assets"), name="assets")
+
+# 2) index para root
+@app.get("/")
+def index():
+    return FileResponse(DIST_DIR / "index.html")
+
+# 3) fallback SPA: cualquier ruta que no sea /api/* debe regresar index.html
+@app.get("/{full_path:path}")
+def spa_fallback(full_path: str):
+    # si quieres excluir API:
+    if full_path.startswith("api/"):
+        return {"detail": "Not Found"}
+    return FileResponse(DIST_DIR / "index.html")

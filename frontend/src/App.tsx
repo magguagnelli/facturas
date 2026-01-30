@@ -7,9 +7,9 @@ import FacturasPage from "./pages/FacturasPage";
 export default function App() {
   return (
     <Routes>
-       <Route path="/facturas" element={<FacturasPage />} />
+      <Route path="/facturas" element={<FacturasPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<Navigate to="/facturas" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

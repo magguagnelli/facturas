@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000";
+const API_URL = "http://0.0.0.0:8000";
 
 export async function loginRequest(username: string, password: string) {
   // FastAPI con OAuth2PasswordRequestForm espera x-www-form-urlencoded

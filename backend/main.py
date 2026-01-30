@@ -47,6 +47,12 @@ def login():
     conn.close()
     return {"message":db_resp}
 
+#facturas home
+@app.get("/api/facturas")
+async def facturas():
+    logger.info("Accessed /api/facturas")
+    return {"message":"Bienvenido al sistema de facturas"}
+
 # --- Static Files Setup ---
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 os.makedirs(static_dir, exist_ok=True)

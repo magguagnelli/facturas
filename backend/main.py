@@ -5,13 +5,16 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pathlib import Path
 import psycopg2
-
+# 
 # --- Logging Setup ---
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
 logger = logging.getLogger(__name__)
+
+app = FastAPI(title="Sistema de Facturas")
+
 #wherehouse
    # DATABRICKS_HOST ="instance-ee9c166c-7472-4aa4-b57c-7234a9730321.database.azuredatabricks.net"
     #HTTP_PATH ="/sql/1.0/warehouses/605b873f22449da5"
@@ -23,16 +26,26 @@ DB_USER ="facturas_role"
 DB_PASSWORD ="18B+|2]mi:nT"
 DB_SSL_MODE = "require"
 
-# --- Logging Setup ---
-app = FastAPI(title="Sistema de Facturas")
+
 
 # --- API Routes ---
 #login home
 @app.get("/api/login")
-async def login():
+def login():
     logger.info("Accessed /api/login")
-    return {"message":"Bienvenido al sistema de facturas"}
-
+    conn = psycopg2.connect(
+        host=DB_HOST,
+        port=5432,
+        dbname=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        sslmode=DB_SSL_MODE,
+    )
+    with conn.cursor() as cur:
+        cur.execute("SELECT NOW()")
+        db_resp = cur.fetchone()[0]
+    conn.close()
+    return {"message":db_resp}
 
 # --- Static Files Setup ---
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")

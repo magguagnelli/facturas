@@ -7,8 +7,8 @@ from pathlib import Path
 import psycopg2
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from auth import authenticate_user, create_access_token
-from deps import get_current_user
+from .auth import authenticate_user, create_access_token
+from .deps import get_current_user
 
 
 # 

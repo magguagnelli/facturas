@@ -1,24 +1,34 @@
 const API_URL = "http://localhost:8000";
 
-export async function apiFetch(
-  path: string,
-  options: RequestInit = {}
-) {
-  const token = localStorage.getItem("token");
+export async function loginRequest(username: string, password: string) {
+  // FastAPI con OAuth2PasswordRequestForm espera x-www-form-urlencoded
+  const form = new URLSearchParams();
+  form.append("username", username);
+  form.append("password", password);
 
-  const res = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
-    },
+  const res = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: form.toString(),
   });
 
-  if (res.status === 401) {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
+  if (!res.ok) {
+    let msg = "Credenciales inválidas";
+    try {
+      const data = await res.json();
+      msg = data?.detail ?? msg;
+    } catch {}
+    throw new Error(msg);
   }
 
-  return res.json();
+  return (await res.json()) as { access_token: string; token_type: string };
+}
+
+export async function meRequest(accessToken: string) {
+  const res = await fetch(`${API_URL}/auth/me`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!res.ok) throw new Error("Token inválido");
+  return (await res.json()) as { username: string };
 }

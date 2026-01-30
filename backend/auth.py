@@ -11,7 +11,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 # demo: usuario hardcodeado (luego lo conectas a BD)
 fake_user = {
     "username": "admin",
-    "password": pwd_context.hash("admin123")
+    "password": "$2a$12$ymC.2Q3c2.J3jE9AyzHHVezpvX08i2ToPTaUx5NUti8AkUIhR6k6q"  # "password" hashed
 }
 
 def verify_password(plain, hashed):

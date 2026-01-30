@@ -3,11 +3,18 @@ import logging
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from databricks import sql
+import psycopg2
 
-    DATABRICKS_HOST ="instance-ee9c166c-7472-4aa4-b57c-7234a9730321.database.azuredatabricks.net"
-    HTTP_PATH ="/sql/1.0/warehouses/605b873f22449da5"
-    TOKEN = "dapi927b2dd86f775c5296eb785afff3053a"
+#wherehouse
+   # DATABRICKS_HOST ="instance-ee9c166c-7472-4aa4-b57c-7234a9730321.database.azuredatabricks.net"
+    #HTTP_PATH ="/sql/1.0/warehouses/605b873f22449da5"
+    #TOKEN = "dapi927b2dd86f775c5296eb785afff3053a"
+#Lakebase
+DB_HOST ="adb-8727252254628701.3.azuredatabricks.net"
+DB_NAME ="databricks_postgres"
+DB_USER ="facturas_role"
+DB_PASSWORD ="18B+|2]mi:nT"
+DB_SSL_MODE = "require"
 
 # --- Logging Setup ---
 app = FastAPI(title="Sistema de Facturas")
@@ -16,16 +23,16 @@ app = FastAPI(title="Sistema de Facturas")
 #loggs
 @app.get("/api/login")
 def login():
-    with sql.connect(
-        server_hostname=DATABRICKS_HOST,
-        http_path=HTTP_PATH,
-        access_token=TOKEN,
-    ) as conn:
-        with conn.cursor() as cur:
-            cur.execute("SELECT current_user(), current_catalog(), current_schema()")
-            print(cur.fetchall())
-
-            cur.execute("SELECT * FROM catalogo.esquema.mi_tabla LIMIT 10")
-            rows = cur.fetchall()
-            print(rows)
-    return {"message":"Login con conexión a BD"}
+    conn = psycopg2.connect(
+        host=DB_HOST,
+        port=5432,
+        dbname=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        sslmode=DB_SSL_MODE,
+    )
+    with conn.cursor() as cur:
+        cur.execute("SELECT NOW()")
+        db_resp = cur.fetchone()[0]
+    conn.close()
+    return {"message":db_resp}

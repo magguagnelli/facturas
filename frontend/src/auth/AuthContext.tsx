@@ -1,45 +1,43 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { apiFetch } from "../lib/api";
+import { loginRequest, meRequest } from "../lib/api";
 
 const AuthContext = createContext<any>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   async function login(username: string, password: string) {
-    const form = new URLSearchParams();
-    form.append("username", username);
-    form.append("password", password);
+    const { access_token } = await loginRequest(username, password);
+    localStorage.setItem("access_token", access_token);
 
-    const res = await fetch("http://localhost:8000/auth/login", {
-      method: "POST",
-      body: form,
-    });
-
-    const data = await res.json();
-    localStorage.setItem("token", data.access_token);
-
-    const me = await apiFetch("/auth/me");
+    const me = await meRequest(access_token);
     setUser(me);
   }
 
   function logout() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
     setUser(null);
   }
 
   useEffect(() => {
-    async function load() {
+    async function init() {
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       try {
-        const me = await apiFetch("/auth/me");
+        const me = await meRequest(token);
         setUser(me);
       } catch {
         logout();
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
-    load();
+    init();
   }, []);
 
   return (

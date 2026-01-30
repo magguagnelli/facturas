@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000";
+const API_URL = "https://facturas-7474655982082282.aws.databricksapps.com:8000";
 
 export async function loginRequest(username: string, password: string) {
   // FastAPI con OAuth2PasswordRequestForm espera x-www-form-urlencoded
